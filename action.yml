@@ -5,7 +5,7 @@ author: 'ibiqlik'
 inputs:
   action:
     required: true
-    description: 'Options: package, test, publish'
+    description: 'Options: package, test, publish, package_and_test'
 
 runs:
   using: 'node12'

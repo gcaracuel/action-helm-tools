@@ -18,7 +18,7 @@ if [[ -n "$DOCKER_REGISTRY_SECRET" ]]; then
         --docker-password=$RT_APIKEY --docker-email=$DOCKER_EMAIL
 fi
 
-helm repo add $HELM_REPO_ADD_NAME $REGISTRY/$HELM_REPO --username $RT_USERNAME --password $RT_APIKEY
+helm repo add $HELM_PULL_REPO $REGISTRY/$HELM_REPO --username $RT_USERNAME --password $RT_APIKEY
 helm repo update
 helm dependency build $CHART_DIR
 helm install $CHART_DIR/ --name $CHART_NAME --namespace $CHART_NAME $EXTRA_CMD

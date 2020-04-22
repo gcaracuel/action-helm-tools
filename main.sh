@@ -21,14 +21,14 @@ set -o pipefail
 export SCRIPT_DIR=$(dirname -- "$(readlink -f "${BASH_SOURCE[0]}" || realpath "${BASH_SOURCE[0]}")")
 
 main() {
-    args=()
 
-    if [[ -z "${INPUT_ACTION}" ]]; then
-        echo "Action missing, please define it in workflow action:"
-        exit 1
+    if [[ "${INPUT_ACTION}" == "package_and_test" ]]; then
+        "$SCRIPT_DIR/package.sh"
+        "$SCRIPT_DIR/test.sh"
+    else
+        "$SCRIPT_DIR/$INPUT_ACTION.sh"
     fi
 
-    "$SCRIPT_DIR/$INPUT_ACTION.sh"
 }
 
 main

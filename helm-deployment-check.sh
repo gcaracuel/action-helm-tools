@@ -1,10 +1,10 @@
 #!/bin/bash
 set -eo pipefail
 
-# Usage: ./helm_deployment_status.sh [--release qsefe] [--namespace default] [--timeout 600]
+# Usage: ./helm_deployment_status.sh [--release qsefe] [--namespace default] [--timeout 300]
 
 NAMESPACE=default
-TIMEOUT=600
+TIMEOUT=300
 
 function process_args() {
     while (( "$#" ))

@@ -7,7 +7,7 @@ install_helm
 
 helm init --client-only
 echo "==> Helm add repo"
-helm repo add $HELM_REPO_ADD_NAME $REGISTRY/$HELM_REPO --username $RT_USERNAME --password $RT_APIKEY
+helm repo add $HELM_PULL_REPO $REGISTRY/$HELM_REPO --username $RT_USERNAME --password $RT_APIKEY
 helm repo update
 
 echo "==> Helm dependency build"
