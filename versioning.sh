@@ -5,13 +5,9 @@ set -o pipefail
 # Get tags, latest release and its commit sha
 git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
 LATEST_RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`) # get latest
+_sha=$(git rev-list -n 1 HEAD)
 
-if [ -z "$LATEST_RELEASE" ]; then
-    LATEST_RELEASE="v0.0.0"
-    _sha=$(git rev-list -n 1 HEAD)
-else
-    _sha=$(git rev-list -n 1 $LATEST_RELEASE)
-fi
+[ -z "$LATEST_RELEASE" ] && LATEST_RELEASE="v0.0.0"
 
 LATEST_RELEASE=${LATEST_RELEASE#v}
 SHORT_TAG_SHA=${_sha:0:7}
