@@ -20,6 +20,8 @@ set -o pipefail
 
 export SCRIPT_DIR=$(dirname -- "$(readlink -f "${BASH_SOURCE[0]}" || realpath "${BASH_SOURCE[0]}")")
 
+source $SCRIPT_DIR/versioning.sh
+
 main() {
 
     if [[ "${INPUT_ACTION}" == "package_and_test" ]]; then
@@ -32,7 +34,3 @@ main() {
 }
 
 main
-
-# "$SCRIPT_DIR/package.sh"
-# "$SCRIPT_DIR/test.sh"
-# "$SCRIPT_DIR/publish.sh"
