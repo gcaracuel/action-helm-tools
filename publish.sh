@@ -8,19 +8,11 @@ export JFROG_CLI_OFFER_CONFIG=false
 install_jfrog
 
 echo "==> Check published version of $CHART_NAME"
-remote=$(mktemp)
-jfrog rt s "$HELM_PUSH_REPO/$CHART_NAME*.tgz" --url $REGISTRY --apikey $RT_APIKEY | jq ".[].path" | jq -rM 'gsub("('$HELM_PUSH_REPO'/)"; "")' >> $remote
-new_tgz=$(ls -1 *.tgz | grep -vFf $remote || true)
-if [ -z "$new_tgz" ]; then
-    printf "No new version to upload\n"
+
+if jfrog rt s "$HELM_PUSH_REPO/$CHART_NAME-$VERSION.tgz" --url $REGISTRY --apikey $RT_APIKEY --fail-no-op; then
+    printf "$CHART_NAME-$VERSION already exist in artifactory $HELM_PUSH_REPO, exit\n"
     exit 0
+else
+    printf "==> Attempting to upload:\n$CHART_NAME-$VERSION.tgz\n\n"
+    jfrog rt u $CHART_NAME-$VERSION.tgz $HELM_PUSH_REPO --url $REGISTRY --apikey $RT_APIKEY --fail-no-op || exit 1
 fi
-
-printf "==> Attempting to upload:\n$new_tgz\n\n"
-regex=""
-for tgz in $new_tgz; do
-    regex="$regex($tgz)|"
-done
-regex=${regex::-1}
-
-jfrog rt u $regex $HELM_PUSH_REPO --regexp --url $REGISTRY --apikey $RT_APIKEY
