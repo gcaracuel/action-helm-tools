@@ -2,9 +2,9 @@
 set -o pipefail
 # set -x
 
-# Get tags, latest release and its commit sha
 git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
-LATEST_RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`) # get latest
+# Get latest release
+LATEST_RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`)
 _sha=$(git rev-list -n 1 HEAD)
 
 [ -z "$LATEST_RELEASE" ] && LATEST_RELEASE="v0.0.0"
@@ -16,7 +16,8 @@ SHORT_TAG_SHA=${_sha:0:7}
 if [ -z "${MAKE_RELEASE:-}" ]; then
     VERSION="$LATEST_RELEASE-$SHORT_TAG_SHA"
 else
-    VERSION=${GITHUB_REF#*/v} # Get version 1.2.3 from GITHUB_REF="refs/tags/v1.2.3"
+    # Get version 1.2.3 from gh actions env var GITHUB_REF="refs/tags/v1.2.3"
+    VERSION=${GITHUB_REF#*/v}
 fi
 
 export LATEST_RELEASE

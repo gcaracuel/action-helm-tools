@@ -89,3 +89,7 @@ jobs:
         RT_USERNAME: ${{ secrets.RT_USERNAME }}
         RT_APIKEY: ${{ secrets.RT_APIKEY }}
 ```
+
+---
+TODO:
+- Test - If failure export pod logs
