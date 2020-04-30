@@ -5,12 +5,10 @@ set -o pipefail
 git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
 # Get latest release
 LATEST_RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`)
-_sha=$(git rev-list -n 1 HEAD)
-
 [ -z "$LATEST_RELEASE" ] && LATEST_RELEASE="v0.0.0"
 
 LATEST_RELEASE=${LATEST_RELEASE#v}
-SHORT_TAG_SHA=${_sha:0:7}
+SHORT_TAG_SHA=${GITHUB_SHA:0:7}
 
 # On tag push set MAKE_RELEASE variable to true
 if [ -z "${MAKE_RELEASE:-}" ]; then
