@@ -7,6 +7,11 @@ git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
 LATEST_RELEASE=$(git describe --tags `git rev-list --tags --max-count=1`)
 [ -z "$LATEST_RELEASE" ] && LATEST_RELEASE="v0.0.0"
 
+# Get PR HEAD commit instead of merge commit
+if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
+    GITHUB_SHA=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
+fi
+
 LATEST_RELEASE=${LATEST_RELEASE#v}
 SHORT_TAG_SHA=${GITHUB_SHA:0:7}
 
