@@ -20,4 +20,5 @@ fi
 
 helm install $CHART_NAME-$VERSION.tgz --name $CHART_NAME --namespace $CHART_NAME $EXTRA_HELM_CMD
 
+sleep 30
 check_helm_deployment

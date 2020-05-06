@@ -25,6 +25,8 @@ source $SCRIPT_DIR/versioning.sh
 
 main() {
 
+    export
+
     if [[ "${INPUT_ACTION}" == "package_and_test" ]]; then
         "$SCRIPT_DIR/package.sh"
         "$SCRIPT_DIR/test.sh"
