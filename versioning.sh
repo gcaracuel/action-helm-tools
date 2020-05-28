@@ -4,7 +4,7 @@ set -o pipefail
 # Get tags, latest release and its commit sha
 git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
 
-get_latest_tag="git tag -l --sort=-v:refname | egrep '^v[0-9].[0-9].[0-9]$' | head -n 1"
+get_latest_tag="git tag -l --sort=-v:refname | egrep '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1"
 
 if git tag -l 2> /dev/null; then
     LATEST_RELEASE=$(eval $get_latest_tag)
