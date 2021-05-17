@@ -30,4 +30,4 @@ set -o pipefail
 
 # # Set GitHub Action environment variable for following job steps
 # echo "::set-env name=VERSION::${VERSION}"
-VERSION=$(cat ./version)
+export VERSION=$(cat ./version)
