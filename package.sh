@@ -16,4 +16,4 @@ echo "==> Linting"
 helm lint $CHART_DIR
 
 echo "==> Helm package"
-helm package $CHART_DIR --version v$VERSION --app-version $VERSION
+helm package $CHART_DIR #--version v$VERSION --app-version $VERSION
