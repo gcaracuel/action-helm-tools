@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
-ENV HELM_VERSION="2.14.3"
-ENV KUBECTL_VERSION="1.15.11"
+ENV HELM_VERSION="3.5.1"
+ENV KUBECTL_VERSION="1.21.0"
 ENV YQ_VERSION="3.3.0"
 
 RUN apt-get update && apt-get upgrade -y && \

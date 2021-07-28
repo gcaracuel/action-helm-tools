@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: ilirbekteshi/runnertools
+      DOCKER_IMAGE: jackbit/runnertools
       DOCKER_FILE: Dockerfile
     steps:
     - uses: actions/checkout@v1

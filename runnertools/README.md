@@ -7,7 +7,7 @@ jobs:
   k8s:
     runs-on: self-hosted
     container:
-      image: ilirbekteshi/runnertools:latest
+      image: jackbit/runnertools:latest
       volumes:
         - /local_path_on_runner/.kube:/.kube
     steps:
